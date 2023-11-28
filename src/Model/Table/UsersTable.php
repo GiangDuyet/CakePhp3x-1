@@ -3,11 +3,15 @@
 namespace App\Model\Table;
 
 use Cake\ORM\Table;
-use cake\Validation\Validation;
 use Cake\Validation\Validator;
 
 class UsersTable extends Table
 {
+    public function initialize(array $config): void
+    {
+        $this->addBehavior('Timestamp');
+    }
+    
     public function validationDefault(Validator $validator)
     {
         $validator
@@ -17,7 +21,7 @@ class UsersTable extends Table
             ->requirePresence('password')
             ->requirePresence('email')
             ->notEmptyString('email', 'Please fill this field');
-            
+
 
         return $validator;
     }
